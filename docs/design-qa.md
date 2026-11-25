@@ -2,7 +2,7 @@
 
 > 日期：2026-11-25 ｜ Node 24.22 ｜ `http://127.0.0.1:3000`
 > 状态：**PASS** 有证据 ｜ **PARTIAL** 部分做到 ｜ **BLOCKED** 没做/没测。
-> 自动验收：`node scripts/qa-check.mjs` → **34/34**；`node scripts/link-check.mjs` → 13 个页面 / 40 个链接；`node scripts/check-static.mjs` → 38 个静态站内链接全部可达。
+> 自动验收：`node scripts/qa-check.mjs` → **36/36**；`node scripts/link-check.mjs` → 15 个页面 / 43 个链接；`node scripts/check-static.mjs` → 41 个静态站内链接全部可达。
 
 | # | 检查项 | 结果 | 证据 / 说明 |
 |---|---|---|---|
@@ -38,7 +38,15 @@
 | 30 | 笔记 + 按钮 | PASS | 笔记页有「+ 新建笔记」和右下 FAB；登录后提交标题/标签/摘要/正文 → 跳详情；未登录跳登录 |
 | 31 | 文档同步 | PASS | 提示词 v3.3、README、design-qa、deploy 文档均已同步 |
 | 32 | 静态构建 | PASS | `build-static` 生成 28 个页面 + 404/sitemap/robots；`check-static` 38 个链接可达；`BASE_PATH=/repo` 构建路径正确 |
-| 33 | Pages 部署 | PASS | 已推送并部署：https://jexil1412.github.io/ ；Actions #1 重跑成功；首页/关于/作品/今日/爱好/音乐/笔记/资源均 200 |
+| 33 | Pages 部署 | PASS | 已推送并部署：https://jexil1412.github.io/ ；Actions 成功；首页/关于/作品/今日/爱好/音乐/笔记/资源均 200 |
+| 34 | 教程栏目 | PASS | `/tutorials` 列表 + `/tutorials/how-to-add-tutorial/` 详情 + `.md` 下载；侧栏在笔记下方；`qa-check` 36/36 |
+| 35 | 教程发布 | PASS | `content/tutorials/*.md` 文件式内容；`publish-tutorials.mjs` 自动 add/commit/push；push 后 Actions 重新构建 |
+
+## v3.4 教程栏目与四页提交版
+
+- **教程**：侧栏「笔记」下方新增「教程」；读取 `content/tutorials/*.md`，生成列表与详情，支持 .md 下载。
+- **发布**：`node scripts/publish-tutorials.mjs` 自动 commit/push；也可在 GitHub 直接上传 .md。
+- **四页静态版**：另做 `网页制作结课作业_4页版/`，纯 HTML/CSS/JS、相对路径、5 种交互、带注释，可双击运行。
 
 ## v3.3 部署（GitHub Pages 静态版）
 
@@ -83,6 +91,8 @@
 | `docs/shots/v3-anime-mobile.png` | 动漫 390 |
 | `docs/shots/v3-music-mobile.png` | 音乐 390 |\n| `public/favicon-128.png` | 浏览器图标 JXL |
 | `docs/shots/v3-notes.png` | 笔记列表 1440 |
+| `docs/shots/v3-tutorials.png` | 教程列表 1440 |
+| `docs/shots/v3-tutorial.png` | 教程详情 1440 |
 | `docs/shots/v3-note.png` | 笔记详情（代码块）1440 |
 
 ## 仍待补

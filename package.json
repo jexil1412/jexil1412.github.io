@@ -16,6 +16,8 @@
     "export:data": "node scripts/export-data.mjs",
     "build:static": "node scripts/build-static.mjs",
     "serve:static": "node scripts/serve-static.mjs",
-    "check:static": "node scripts/check-static.mjs"
+    "check:static": "node scripts/check-static.mjs",
+    "tutorials:publish": "node scripts/publish-tutorials.mjs",
+    "tutorials:watch": "node scripts/publish-tutorials.mjs --watch"
   }
 }

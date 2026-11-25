@@ -13,8 +13,9 @@ import {
 } from './lib/db.mjs';
 import {
   layout, homePage, aboutPage, workPage, todayPage, hobbiesPage, gamePage, animePage, musicPage,
-  notesPage, notePage, adminPage, workFormPage, hobbyFormPage, noteFormPage, loginPage, notFoundPage, DOMAINS
+  notesPage, notePage, tutorialsPage, tutorialPage, adminPage, workFormPage, hobbyFormPage, noteFormPage, loginPage, notFoundPage, DOMAINS
 } from './lib/pages.mjs';
+import { listTutorials, tutorialBySlug } from './lib/tutorials.mjs';
 import { renderMarkdown, parseFrontmatter } from './lib/markdown.mjs';
 import { createNote } from './lib/note-create.mjs';
 import { syncSteam, importEpic, steamConfig } from './lib/steam.mjs';
@@ -275,6 +276,29 @@ async function handle(req, res) {
     if (!note) return html(res, notFoundPage(), 404);
     const { body } = parseFrontmatter(note.body_md);
     return html(res, notePage({ note, html: renderMarkdown(body, { title: note.title }) }));
+  }
+
+  if (method === 'GET' && pathname === '/tutorials') {
+    return html(res, tutorialsPage({ tutorials: listTutorials() }));
+  }
+
+  if (method === 'GET' && pathname.startsWith('/tutorials/') && pathname.endsWith('.md')) {
+    const slug = decodeURIComponent(pathname.slice('/tutorials/'.length, -3));
+    const tutorial = tutorialBySlug(slug);
+    if (!tutorial) return html(res, notFoundPage(), 404);
+    res.writeHead(200, {
+      'content-type': 'text/markdown; charset=utf-8',
+      'content-disposition': `attachment; filename="${tutorial.slug}.md"`
+    });
+    return res.end(tutorial.raw);
+  }
+
+  if (method === 'GET' && pathname.startsWith('/tutorials/')) {
+    const slug = decodeURIComponent(pathname.slice('/tutorials/'.length));
+    const tutorial = tutorialBySlug(slug);
+    if (!tutorial) return html(res, notFoundPage(), 404);
+    const { body } = parseFrontmatter(tutorial.raw);
+    return html(res, tutorialPage({ tutorial, html: renderMarkdown(body, { title: tutorial.title }) }));
   }
 
   if (method === 'GET' && pathname === '/login') {

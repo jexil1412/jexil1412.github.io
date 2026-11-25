@@ -1,6 +1,6 @@
 # Jexil — 天蓝 · 液态玻璃
 
-首页只有一个 **Jexil** 字标（浏览器图标是天蓝底 JXL）；左侧玻璃栏分四组：关于（3 件作品）、今日、爱好（游戏 / 动漫 / 音乐）、笔记（可上传或新建 `.md`）。
+首页只有一个 **Jexil** 字标（浏览器图标是天蓝底 JXL）；左侧玻璃栏分五组：关于（3 件作品）、今日、爱好（游戏 / 动漫 / 音乐）、笔记（可上传或新建 `.md`）、教程（`content/tutorials/*.md` 自动生成）。
 零依赖，Node 24 直接跑，不需要 `npm install`。
 
 ## 跑起来
@@ -24,6 +24,8 @@ node server.mjs
 | `/hobbies/music` | 九位歌手 + 30 秒官方试听 + QQ 音乐链接（旧 `/hobbies/singing` 301） |
 | `/notes` | 笔记列表，按标签筛选 |
 | `/notes/[slug]` | Markdown 渲染 + 下载原文 |
+| `/tutorials` | 教程列表，读取 `content/tutorials/*.md` |
+| `/tutorials/[slug]` | 教程详情 + 下载 .md |
 | `/login` `/admin` | 站主登录 / 后台 |
 | `/works/*` | 301 到 `/about/works/*` |
 
@@ -71,6 +73,17 @@ summary: 一句话摘要
 - 渲染在服务端完成：先转义 HTML 再解析 Markdown；原始 HTML 不会执行，`javascript:` 链接被剥离；只允许 `/uploads/` 图片。
 - **+ 新建笔记**：笔记页右上角按钮和右下角圆形 `+`，登录后填标题 / 标签 / 摘要 / Markdown 正文即可创建；未登录会先跳登录。
 - 示例文件：[docs/example-note.md](docs/example-note.md)。
+
+## 教程（content/tutorials/*.md）
+
+教程不经过数据库：把 `.md` 放进 `content/tutorials/`，构建时自动生成 `/tutorials/` 列表和 `/tutorials/<slug>/` 详情。
+
+```powershell
+node scripts/publish-tutorials.mjs      # 自动 git add/commit/push，Actions 重新发布
+node scripts/publish-tutorials.mjs --watch  # 监听目录，新增 .md 后自动推送
+```
+
+也可以直接在 GitHub 仓库的 `content/tutorials/` 上传 `.md`，push 后自动发布。
 
 ## 爱好数据（游戏 / 动漫 / 音乐）
 
@@ -167,8 +180,8 @@ personal-site/
 ## 验收
 
 ```powershell
-node scripts/qa-check.mjs     # 34 项：隐私 / 上传 / 笔记 XSS / 游戏审批 / 动漫 / 音乐 / 抓取
-node scripts/link-check.mjs   # 13 个页面、40 个链接\nnode scripts/check-static.mjs # 静态构建的站内链接与资源
+node scripts/qa-check.mjs     # 36 项：隐私 / 上传 / 笔记 XSS / 教程 / 游戏审批 / 动漫 / 音乐 / 抓取
+node scripts/link-check.mjs   # 15 个页面、43 个链接\nnode scripts/check-static.mjs # 静态构建的站内链接与资源（41 个）
 ```
 
 截图在 `docs/shots/v3-*.png`；验收记录在 `docs/design-qa.md`。

@@ -1,6 +1,6 @@
 // 站内链接与图片可达性检查
 const base = 'http://127.0.0.1:3000';
-const pages = ['/', '/about', '/about/works/earth', '/about/works/eye', '/about/works/mandarin-app', '/today', '/hobbies', '/hobbies/game', '/hobbies/anime', '/hobbies/music', '/notes', '/notes/how-this-site-was-built', '/login'];
+const pages = ['/', '/about', '/about/works/earth', '/about/works/eye', '/about/works/mandarin-app', '/today', '/hobbies', '/hobbies/game', '/hobbies/anime', '/hobbies/music', '/notes', '/notes/how-this-site-was-built', '/tutorials', '/tutorials/how-to-add-tutorial', '/login'];
 const seen = new Set();
 const bad = [];
 

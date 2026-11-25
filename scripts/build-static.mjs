@@ -209,15 +209,27 @@ for (const note of notes(false)) {
   fs.writeFileSync(path.join(OUT, 'notes', `${note.slug}.md`), note.body_md);
 }
 
+const tutorials = (await import('../lib/tutorials.mjs')).listTutorials();
+writePage('/tutorials/', pages.tutorialsPage({ tutorials }));
+for (const tutorial of tutorials) {
+  const { body } = parseFrontmatter(tutorial.raw);
+  writePage(`/tutorials/${tutorial.slug}/`, pages.tutorialPage({
+    tutorial,
+    html: renderMarkdown(body, { title: tutorial.title })
+  }));
+  fs.writeFileSync(path.join(OUT, 'tutorials', `${tutorial.slug}.md`), tutorial.raw);
+}
+
 // 404 / robots / sitemap / nojekyll
 fs.writeFileSync(path.join(OUT, '404.html'), rewrite(pages.notFoundPage()));
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}${BASE}/sitemap.xml\n`);
 
-const routes = ['', 'about/', 'today/', 'hobbies/', 'hobbies/game/', 'hobbies/anime/', 'hobbies/music/', 'notes/',
+const routes = ['', 'about/', 'today/', 'hobbies/', 'hobbies/game/', 'hobbies/anime/', 'hobbies/music/', 'notes/', 'tutorials/',
   ...allWorks.map((w) => `about/works/${w.slug}/`),
   ...animeAll.map((s) => `hobbies/anime/${s.platform}/`),
-  ...notes(false).map((n) => `notes/${n.slug}/`)];
+  ...notes(false).map((n) => `notes/${n.slug}/`),
+  ...tutorials.map((t) => `tutorials/${t.slug}/`)];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${routes.map((route) => `  <url><loc>${SITE_URL}${BASE}/${route}${route.endsWith('/') || route === '' ? '' : '/'}</loc></url>`).join('\n')}

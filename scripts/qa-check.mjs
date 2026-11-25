@@ -217,6 +217,14 @@ await action({ entity: 'work', action: 'down', id: second.id });
 const orderRestored = db.prepare('SELECT slug FROM works ORDER BY sort_order, title').all().map((r) => r.slug);
 check('排序 ↑ 生效并恢复', orderAfter[0] === second.slug && orderRestored.join() === orderBefore.join(), `${orderBefore.join(' → ')} | ${orderAfter.join(' → ')}`);
 
+const tutorialsRes = await fetch(base + '/tutorials');
+const tutorialsHtml = await tutorialsRes.text();
+check('教程栏目可访问', tutorialsRes.status === 200 && tutorialsHtml.includes('如何新增一篇教程'), `status=${tutorialsRes.status}`);
+const tutorialRes = await fetch(base + '/tutorials/how-to-add-tutorial');
+const tutorialMd = await fetch(base + '/tutorials/how-to-add-tutorial.md');
+const tutorialHtml = await tutorialRes.text();
+check('教程详情与 .md 下载', tutorialRes.status === 200 && tutorialHtml.includes('content/tutorials') && tutorialMd.status === 200);
+
 const failed = results.filter((r) => !r.ok).length;
 console.log(`\n${results.length - failed}/${results.length} passed`);
 process.exit(failed ? 1 : 0);
