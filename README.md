@@ -175,13 +175,15 @@ personal-site/
 8. 事件源依赖外网，国内网络下 The Verge / GameSpot / Pitchfork 可能慢；失败时页面降级。
 9. **Steam 本机记录已实测**：不设 API key 就同步到 30 款 pending 游戏（只读本机文件）；`STEAM_API_KEY` 分支未实测。Epic 导入和审批流已用测试数据跑通。
 10. **Epic 只能手动导入导出文件**；腾讯 / 爱奇艺 / 优酷只做平台入口，B 站只取 12 条公开索引，不承诺全量。
-11. 音乐是手工元数据（9 位歌手 / 54 首）+ 30 秒试听，51 首有试听、3 首只有平台链接；没有完整音频与歌词；B 站封面为外链，可能被防盗链拦。\n12. **GitHub Pages 是静态版**：没有登录/后台/上传/审批/新建笔记；线上内容更新要走 `export-data → git push`；+ 按钮在静态构建里隐藏。
+11. 音乐是手工元数据（9 位歌手 / 54 首）+ 30 秒试听，51 首有试听、3 首只有平台链接；没有完整音频与歌词；B 站封面为外链，可能被防盗链拦。
+12. **GitHub Pages 是静态版**：没有登录/后台/上传/审批/新建笔记；线上内容更新要走 `export-data → git push`；+ 按钮在静态构建里隐藏。
 
 ## 验收
 
 ```powershell
 node scripts/qa-check.mjs     # 36 项：隐私 / 上传 / 笔记 XSS / 教程 / 游戏审批 / 动漫 / 音乐 / 抓取
-node scripts/link-check.mjs   # 15 个页面、43 个链接\nnode scripts/check-static.mjs # 静态构建的站内链接与资源（41 个）
+node scripts/link-check.mjs   # 15 个页面、43 个链接
+node scripts/check-static.mjs # 静态构建的站内链接与资源（41 个）
 ```
 
 截图在 `docs/shots/v3-*.png`；验收记录在 `docs/design-qa.md`。

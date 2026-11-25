@@ -89,7 +89,8 @@
 | `docs/shots/v3-anime.png` | 动漫：B 站索引 + 平台入口 1440 |
 | `docs/shots/v3-music.png` | 音乐：九位歌手 + 播放条 1440 |
 | `docs/shots/v3-anime-mobile.png` | 动漫 390 |
-| `docs/shots/v3-music-mobile.png` | 音乐 390 |\n| `public/favicon-128.png` | 浏览器图标 JXL |
+| `docs/shots/v3-music-mobile.png` | 音乐 390 |
+| `public/favicon-128.png` | 浏览器图标 JXL |
 | `docs/shots/v3-notes.png` | 笔记列表 1440 |
 | `docs/shots/v3-tutorials.png` | 教程列表 1440 |
 | `docs/shots/v3-tutorial.png` | 教程详情 1440 |
