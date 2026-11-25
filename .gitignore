@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.static-tmp/
+.edge-*/
+.edge-qa/
+.edge-shot/
+data/app.db
+data/app.db-shm
+data/app.db-wal
+data/secret.txt
+data/fetch.log
+data/steam-names.json

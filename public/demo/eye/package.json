@@ -1,0 +1,11 @@
+{
+  "name": "eye-bloom",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MediaPipe 面部网格驱动的赛博虹膜：眨眼、视线追踪、三套瞳式。",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs --port 5182"
+  }
+}

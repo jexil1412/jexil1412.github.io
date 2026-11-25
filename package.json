@@ -1,0 +1,21 @@
+{
+  "name": "jexil1412-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Jexil1412 的个人站：作品 / 今日 / 爱好",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "seed": "node scripts/seed.mjs",
+    "fetch:events": "node scripts/fetch-events.mjs",
+    "check:sources": "node scripts/check-sources.mjs",
+    "export:data": "node scripts/export-data.mjs",
+    "build:static": "node scripts/build-static.mjs",
+    "serve:static": "node scripts/serve-static.mjs",
+    "check:static": "node scripts/check-static.mjs"
+  }
+}

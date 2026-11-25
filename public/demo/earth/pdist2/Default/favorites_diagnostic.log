@@ -1,0 +1,18 @@
+2026-11-19 06:19:42.059: [INFO] CurrentProfilePath: D:\01\starry\earth\pdist2\Default
+2026-11-19 06:19:42.059: [INFO] Profiles total count: 1
+2026-11-19 06:19:42.059: [INFO] Profile: name=用户配置 1 path=D:\01\starry\earth\pdist2\Default lastActive=2026-11-19T06:19:42.049Z
+2026-11-19 06:19:42.059: [INFO] LastUsedProfileDir: D:\01\starry\earth\pdist2\Default
+2026-11-19 06:19:42.059: [INFO] MostRecentlyActiveProfile: name=用户配置 1 path=D:\01\starry\earth\pdist2\Default lastActive=2026-11-19T06:19:42.049Z
+2026-11-19 06:19:42.059: [INFO] OnDoneLoading sync enabled: 0
+2026-11-19 06:19:42.059: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-19 06:19:42.059: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-19 06:19:42.059: [INFO] BookmarksSnapshot Startup total=2 bar=2 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-19 06:19:42.072: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-11-19 06:19:42.236: [INFO] VisibilityChanged: 0
+2026-11-19 06:19:42.753: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-11-19 06:19:42.757: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-11-19 06:19:42.761: [INFO] Primary account changed.
+2026-11-19 06:19:42.761: [INFO] OnPrimaryAccountChanged PrimaryAccountChangeEvent::Type::kSet
+2026-11-19 06:19:42.770: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-11-19 06:19:42.781: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-11-19 06:19:51.474: [INFO] BookmarksSnapshot Shutdown total=2 bar=2 other=0 mobile=0 showBar=0 showBarNTP=1

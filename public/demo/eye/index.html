@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>瞳渊 · 赛博异瞳</title>
+<meta name="description" content="MediaPipe 面部网格驱动的赛博异瞳：Canvas 2D 锐利线稿、极坐标星芒虹膜、菱形异形瞳孔、宝石切面高光、强泛光与色差。眨眼与视线追踪，本地推理。" />
+<meta name="theme-color" content="#02040a" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%235fe6ff' stroke-width='1.3'%3E%3Cpath d='M3 16c4-6 9-9 13-9s9 3 13 9c-4 6-9 9-13 9s-9-3-13-9Z'/%3E%3Ccircle cx='16' cy='16' r='5'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%235fe6ff'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="stylesheet" href="./css/style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/build/three.module.js",
+    "three/addons/": "./vendor/three/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body data-mode="0">
+
+<canvas id="scene" aria-label="由面部动作控制的发光虹膜"></canvas>
+
+<div class="vignette" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="scanline" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M2.5 16c4.4-6.2 9-9.2 13.5-9.2S25.1 9.8 29.5 16c-4.4 6.2-9 9.2-13.5 9.2S6.9 22.2 2.5 16Z" />
+        <circle cx="16" cy="16" r="5.1" />
+        <circle cx="16" cy="16" r="1.6" fill="currentColor" stroke="none" />
+        <path d="M16 6.8v2.4M16 22.8v2.4M6.4 16H4M28 16h-2.4" />
+      </svg>
+      <span class="mark__no">IRIS&nbsp;01</span>
+    </div>
+
+    <div class="modes" id="modes" role="group" aria-label="瞳式">
+      <button class="mode" type="button" data-mode-btn="0" aria-pressed="true">
+        <i></i><span>01</span>青焰
+      </button>
+      <button class="mode" type="button" data-mode-btn="1" aria-pressed="false">
+        <i></i><span>02</span>绯月
+      </button>
+      <button class="mode" type="button" data-mode-btn="2" aria-pressed="false">
+        <i></i><span>03</span>琥珀
+      </button>
+    </div>
+  </div>
+
+  <div class="status">
+    <span class="pill" id="statusPill">
+      <i class="dot" id="statusDot"></i>
+      <span id="statusText">指针模式</span>
+    </span>
+    <span class="fps" aria-hidden="true"><b id="fpsValue">60</b> FPS</span>
+    <button class="icon-btn" id="btnCamera" type="button" aria-label="摄像头开关">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true">
+        <rect x="2" y="5.5" width="11" height="9" rx="1.4" />
+        <path d="M13 9l4.5-2.2v6.4L13 11z" />
+      </svg>
+    </button>
+    <button class="icon-btn" id="btnFull" type="button" aria-label="切换全屏">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true">
+        <path d="M7.5 3H3v4.5M12.5 3H17v4.5M17 12.5V17h-4.5M7.5 17H3v-4.5" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<section class="intro" id="intro">
+  <h1 class="intro__title">瞳渊</h1>
+  <p class="intro__lede">
+    眨眼，眼睑合拢；睁眼，虹膜在光里舒展。<br />
+    你的视线落在哪里，瞳孔就看向哪里。
+  </p>
+  <div class="intro__actions">
+    <button class="btn btn--solid" id="btnStart" type="button">
+      <span class="btn__label">开启摄像头</span>
+      <span class="btn__bar" aria-hidden="true"></span>
+    </button>
+    <button class="btn btn--ghost" id="btnPointer" type="button">用指针试试</button>
+  </div>
+  <p class="intro__note" id="introNote">
+    478 个面部关键点全部在本地推理，不上传。1 / 2 / 3 切换瞳色，空格眨眼。
+  </p>
+</section>
+
+<div class="hud" id="hud" hidden>
+  <div class="gesture">
+    <span class="gesture__end">闭眼</span>
+    <span class="meter" aria-hidden="true">
+      <span class="meter__base"></span>
+      <span class="meter__fill" id="meterFill"></span>
+      <span class="meter__knob" id="meterKnob"></span>
+    </span>
+    <span class="gesture__end">睁眼</span>
+    <span class="gesture__state" id="eyeState">凝视</span>
+  </div>
+  <p class="hud__hint" id="hudHint">视线跟随你的眼睛</p>
+</div>
+
+<aside class="preview" id="preview" hidden aria-label="摄像头画面与面部网格">
+  <video id="video" playsinline muted></video>
+  <canvas id="faceCanvas" width="384" height="288"></canvas>
+  <span class="preview__tag"><i></i>MESH</span>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript>
+  <p style="position:fixed;inset:auto 24px 24px;color:#efe9e4;font:15px/1.7 sans-serif">
+    这枚虹膜需要 JavaScript 与 WebGL 才能点亮。
+  </p>
+</noscript>
+
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
