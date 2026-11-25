@@ -35,7 +35,7 @@ $env:ADMIN_PASSWORD='换成你的密码'; node server.mjs
 
 ## 部署到 GitHub Pages（静态版）
 
-**已上线：<https://jexil1412.github.io/jexil-site/>**（仓库 `jexil1412/jexil-site`，Pages Source = GitHub Actions）
+**已上线：<https://jexil1412.github.io/>**（仓库 `jexil1412/jexil1412.github.io`，Pages Source = GitHub Actions）
 
 GitHub Pages 跑不了 Node/SQLite，所以线上是**只读静态版**：作品、今日、爱好、音乐试听、笔记阅读、demo 都能看；后台/登录/上传/审批/新建笔记留在本地。
 

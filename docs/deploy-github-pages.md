@@ -1,7 +1,7 @@
 # 部署到 GitHub Pages（静态版）
 
-> 已上线：<https://jexil1412.github.io/jexil-site/>  
-> 仓库：<https://github.com/jexil1412/jexil-site>（Pages Source = GitHub Actions）
+> 已上线：<https://jexil1412.github.io/>  
+> 仓库：<https://github.com/jexil1412/jexil1412.github.io>（Pages Source = GitHub Actions）
 >
 > 目标：国内一般能打开、完全免费、每天自动更新「今日」。
 > 代价：线上是只读展示；后台、登录、上传、游戏审批、+ 新建笔记只在本地用。

@@ -38,14 +38,14 @@
 | 30 | 笔记 + 按钮 | PASS | 笔记页有「+ 新建笔记」和右下 FAB；登录后提交标题/标签/摘要/正文 → 跳详情；未登录跳登录 |
 | 31 | 文档同步 | PASS | 提示词 v3.3、README、design-qa、deploy 文档均已同步 |
 | 32 | 静态构建 | PASS | `build-static` 生成 28 个页面 + 404/sitemap/robots；`check-static` 38 个链接可达；`BASE_PATH=/repo` 构建路径正确 |
-| 33 | Pages 部署 | PASS | 已推送并部署：https://jexil1412.github.io/jexil-site/ ；Actions #1 重跑成功；首页/关于/作品/今日/爱好/音乐/笔记/资源均 200 |
+| 33 | Pages 部署 | PASS | 已推送并部署：https://jexil1412.github.io/ ；Actions #1 重跑成功；首页/关于/作品/今日/爱好/音乐/笔记/资源均 200 |
 
 ## v3.3 部署（GitHub Pages 静态版）
 
 - `export-data` 导出公开快照；`build-static` 生成 28 个静态页面 + 资源（133MB，含 demo）。
 - Actions 工作流：push + 每天 08:30（北京时间）抓事件后发布；Pages Source 选 GitHub Actions。
 - 线上只读：登录/后台/上传/审批/+ 新建笔记不可用，`+` 在构建时删除。
-- **已上线**：https://jexil1412.github.io/jexil-site/ （仓库 jexil1412/jexil-site，Source = GitHub Actions，Actions 部署成功）。
+- **已上线**：https://jexil1412.github.io/ （仓库 jexil1412/jexil1412.github.io，Source = GitHub Actions，Actions 部署成功）。
 
 ## v3.2 本次改动
 
