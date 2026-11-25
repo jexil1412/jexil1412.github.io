@@ -183,7 +183,7 @@ personal-site/
 ```powershell
 node scripts/qa-check.mjs     # 36 项：隐私 / 上传 / 笔记 XSS / 教程 / 游戏审批 / 动漫 / 音乐 / 抓取
 node scripts/link-check.mjs   # 15 个页面、43 个链接
-node scripts/check-static.mjs # 静态构建的站内链接与资源（41 个）
+node scripts/check-static.mjs # 静态构建的站内链接与资源（43 个）
 ```
 
 截图在 `docs/shots/v3-*.png`；验收记录在 `docs/design-qa.md`。

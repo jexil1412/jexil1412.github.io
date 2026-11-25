@@ -2,7 +2,7 @@
 
 > 日期：2026-11-25 ｜ Node 24.22 ｜ `http://127.0.0.1:3000`
 > 状态：**PASS** 有证据 ｜ **PARTIAL** 部分做到 ｜ **BLOCKED** 没做/没测。
-> 自动验收：`node scripts/qa-check.mjs` → **36/36**；`node scripts/link-check.mjs` → 15 个页面 / 43 个链接；`node scripts/check-static.mjs` → 41 个静态站内链接全部可达。
+> 自动验收：`node scripts/qa-check.mjs` → **36/36**；`node scripts/link-check.mjs` → 15 个页面 / 43 个链接；`node scripts/check-static.mjs` → 43 个静态站内链接全部可达。
 
 | # | 检查项 | 结果 | 证据 / 说明 |
 |---|---|---|---|
