@@ -2,7 +2,7 @@
 
 > 日期：2026-11-25 ｜ Node 24.22 ｜ `http://127.0.0.1:3000`
 > 状态：**PASS** 有证据 ｜ **PARTIAL** 部分做到 ｜ **BLOCKED** 没做/没测。
-> 自动验收：`node scripts/qa-check.mjs` → **34/34**；`node scripts/link-check.mjs` → 13 个页面 / 40 个链接全部可达。
+> 自动验收：`node scripts/qa-check.mjs` → **34/34**；`node scripts/link-check.mjs` → 13 个页面 / 40 个链接；`node scripts/check-static.mjs` → 38 个静态站内链接全部可达。
 
 | # | 检查项 | 结果 | 证据 / 说明 |
 |---|---|---|---|
@@ -36,7 +36,14 @@
 | 28 | 本机 Steam | PASS | 自动从 `login.vdf` / `localconfig.vdf` 识别本机账号，同步 30 款 pending；未上传凭据；后台只显示「本机已发现」 |
 | 29 | 音乐播放 | PASS | 点击 ▶ 后 `audio` readyState=4、`paused=false`；单播放条、一次只播一首；51 首有试听 |
 | 30 | 笔记 + 按钮 | PASS | 笔记页有「+ 新建笔记」和右下 FAB；登录后提交标题/标签/摘要/正文 → 跳详情；未登录跳登录 |
-| 31 | 文档同步 | PASS | 提示词 v3.2、README、design-qa 均已同步本次 5 项改动 |
+| 31 | 文档同步 | PASS | 提示词 v3.3、README、design-qa、deploy 文档均已同步 |\n| 32 | 静态构建 | PASS | `build-static` 生成 28 个页面 + 404/sitemap/robots；`check-static` 38 个链接可达；`BASE_PATH=/repo` 构建路径正确 |\n| 33 | Pages 部署 | PARTIAL | Actions 工作流与静态产物已就绪；**尚未推送到 GitHub 仓库**，等仓库地址后完成线上验证 |
+
+## v3.3 部署（GitHub Pages 静态版）
+
+- `export-data` 导出公开快照；`build-static` 生成 28 个静态页面 + 资源（133MB，含 demo）。
+- Actions 工作流：push + 每天 08:30（北京时间）抓事件后发布；Pages Source 选 GitHub Actions。
+- 线上只读：登录/后台/上传/审批/+ 新建笔记不可用，`+` 在构建时删除。
+- **卡点**：还没拿到 GitHub 仓库地址，未推送；拿到后需在仓库 Settings → Pages 选 GitHub Actions。
 
 ## v3.2 本次改动
 
