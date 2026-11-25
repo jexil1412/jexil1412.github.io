@@ -10,8 +10,8 @@
 | 2 | 无编号 | PASS | `qa-check`「界面无 00/01 编号」；App 封面已重排，去掉了原来的 `NO.01` |
 | 3 | 侧栏 | PASS | 264px 玻璃栏，四组手风琴；当前组展开、子项胶囊高亮；`v3-home.png` / `v3-today.png` |
 | 4 | 移动抽屉 | PASS | 390 下顶部条 + 全高抽屉 + 遮罩；`v3-drawer.png`。Esc 关闭已在 JS 实现，未做自动化按键测试（见 #18） |
-| 5 | 作品 slider | PARTIAL | 已验证：连点下一件到 `translateX(-300%)`、边界 `disabled`、上一件回到 -200%、键盘 ← 回到 -100%。**触摸滑动**走 pointer 事件，未上真机验证 |
-| 6 | 关于含作品 | PASS | `/about` 4 个 slide；`/works` → 301 `/about`，`/works/earth` → 301 `/about/works/earth` |
+| 5 | 作品 slider | PARTIAL | 3 件作品；已验证下一件/上一件、边界 `disabled`、键盘 ← → 生效。**触摸滑动**走 pointer 事件，未上真机验证 |
+| 6 | 关于含作品 | PASS | `/about` 3 个 slide；`/works` → 301 `/about`，`/works/earth` → 301 `/about/works/earth` |
 | 7 | 笔记上传 | PARTIAL | API 全链路：上传 → 列表 → 详情渲染（标题/列表/代码块/链接）→ 下载原文；后台文件选择器的完整 UI 手测未做（无头环境不能选文件） |
 | 8 | md 安全 | PASS | `<script>alert(1)</script>` 输出为 `&lt;script&gt;`；`javascript:` 链接被剥离；`bad.txt` 返回 400；>1MB 拒绝 |
 | 9 | 标签分类 | PASS | frontmatter `tags` 出现在列表、侧栏「笔记」下（最多 5 个）与筛选胶囊 |
@@ -36,14 +36,16 @@
 | 28 | 本机 Steam | PASS | 自动从 `login.vdf` / `localconfig.vdf` 识别本机账号，同步 30 款 pending；未上传凭据；后台只显示「本机已发现」 |
 | 29 | 音乐播放 | PASS | 点击 ▶ 后 `audio` readyState=4、`paused=false`；单播放条、一次只播一首；51 首有试听 |
 | 30 | 笔记 + 按钮 | PASS | 笔记页有「+ 新建笔记」和右下 FAB；登录后提交标题/标签/摘要/正文 → 跳详情；未登录跳登录 |
-| 31 | 文档同步 | PASS | 提示词 v3.3、README、design-qa、deploy 文档均已同步 |\n| 32 | 静态构建 | PASS | `build-static` 生成 28 个页面 + 404/sitemap/robots；`check-static` 38 个链接可达；`BASE_PATH=/repo` 构建路径正确 |\n| 33 | Pages 部署 | PARTIAL | Actions 工作流与静态产物已就绪；**尚未推送到 GitHub 仓库**，等仓库地址后完成线上验证 |
+| 31 | 文档同步 | PASS | 提示词 v3.3、README、design-qa、deploy 文档均已同步 |
+| 32 | 静态构建 | PASS | `build-static` 生成 28 个页面 + 404/sitemap/robots；`check-static` 38 个链接可达；`BASE_PATH=/repo` 构建路径正确 |
+| 33 | Pages 部署 | PASS | 已推送并部署：https://jexil1412.github.io/jexil-site/ ；Actions #1 重跑成功；首页/关于/作品/今日/爱好/音乐/笔记/资源均 200 |
 
 ## v3.3 部署（GitHub Pages 静态版）
 
 - `export-data` 导出公开快照；`build-static` 生成 28 个静态页面 + 资源（133MB，含 demo）。
 - Actions 工作流：push + 每天 08:30（北京时间）抓事件后发布；Pages Source 选 GitHub Actions。
 - 线上只读：登录/后台/上传/审批/+ 新建笔记不可用，`+` 在构建时删除。
-- **卡点**：还没拿到 GitHub 仓库地址，未推送；拿到后需在仓库 Settings → Pages 选 GitHub Actions。
+- **已上线**：https://jexil1412.github.io/jexil-site/ （仓库 jexil1412/jexil-site，Source = GitHub Actions，Actions 部署成功）。
 
 ## v3.2 本次改动
 

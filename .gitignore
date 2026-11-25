@@ -10,3 +10,5 @@ data/app.db-wal
 data/secret.txt
 data/fetch.log
 data/steam-names.json
+tools/
+.gh/
